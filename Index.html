@@ -1,0 +1,905 @@
+<!DOCTYPE html>
+<html lang="en">  
+<head>  
+<meta charset="UTF-8">  
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">  
+<title>Ahad SIM Info | CYBER DATABASE</title>  
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">  
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&family=Rajdhani:wght@600;700&display=swap" rel="stylesheet">  
+
+<style>
+:root {
+    --matrix-green: #00ff41;
+    --matrix-dark-green: #008f11;
+    --matrix-bg: #0a0a0a;
+    --matrix-card: #0d1a0d;
+    --primary: #00ffff;
+    --primary-hover: #00d4ff;
+    --accent: #ff00ff;
+    --text-main: #ffffff;
+    --text-sub: #8a9bbd;
+    --border: #1c253b;
+    --whatsapp: #25D366;
+    --neon: #00ffff;
+    --glitch-color1: #ff00ff;
+    --glitch-color2: #00ffff;
+}
+
+* { 
+    box-sizing: border-box; 
+    outline: none; 
+    -webkit-tap-highlight-color: transparent; 
+}
+
+body {
+    margin: 0; 
+    padding: 0;
+    background-color: var(--matrix-bg);
+    font-family: 'Share Tech Mono', monospace;
+    display: flex; 
+    flex-direction: column; 
+    align-items: center;
+    min-height: 100vh;
+    overflow-x: hidden;
+    color: var(--matrix-green);
+    position: relative;
+}
+
+/* Matrix rain effect */
+.matrix-rain {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -1;
+    opacity: 0.15;
+}
+
+.matrix-column {
+    position: absolute;
+    top: -100px;
+    width: 1.5vw;
+    height: 150px;
+    color: var(--matrix-green);
+    font-size: 1.8vw;
+    text-shadow: 0 0 5px var(--matrix-green);
+    writing-mode: vertical-rl;
+    text-orientation: upright;
+    animation: rain 15s linear infinite;
+    opacity: 0.7;
+}
+
+@keyframes rain {
+    0% { transform: translateY(-100px); opacity: 0; }
+    5% { opacity: 0.8; }
+    95% { opacity: 0.8; }
+    100% { transform: translateY(100vh); opacity: 0; }
+}
+
+/* Scanline effect */
+.scanlines {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        to bottom,
+        transparent 50%,
+        rgba(0, 255, 65, 0.03) 50%
+    );
+    background-size: 100% 4px;
+    pointer-events: none;
+    z-index: 999;
+    opacity: 0.4;
+}
+
+/* Glitch effect */
+.glitch {
+    position: relative;
+    animation: glitch 5s infinite;
+}
+
+@keyframes glitch {
+    0% { transform: translate(0); }
+    2% { transform: translate(-2px, 2px); }
+    4% { transform: translate(-2px, -2px); }
+    6% { transform: translate(2px, 2px); }
+    8% { transform: translate(2px, -2px); }
+    10% { transform: translate(0); }
+    100% { transform: translate(0); }
+}
+
+.app-container {
+    width: 100%; 
+    max-width: 480px;
+    display: flex; 
+    flex-direction: column; 
+    align-items: center;
+    position: relative;
+    z-index: 10;
+    padding: 0 15px;
+}
+
+.logo-wrapper { 
+    margin-top: 30px; 
+    margin-bottom: 20px; 
+    position: relative; 
+}
+
+.logo-circle {
+    width: 100px; 
+    height: 100px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, #001a00, #000);
+    border: 2px solid var(--matrix-green);
+    box-shadow: 
+        0 0 20px var(--matrix-green),
+        0 0 40px var(--matrix-green),
+        inset 0 0 20px rgba(0, 255, 65, 0.3);
+    display: flex; 
+    justify-content: center; 
+    align-items: center;
+    font-family: 'Orbitron', sans-serif; 
+    font-size: 2.5rem; 
+    font-weight: 900; 
+    color: var(--matrix-green);
+    position: relative; 
+    z-index: 2;
+    animation: neonPulse 2s infinite alternate, rotate 20s linear infinite;
+    text-shadow: 0 0 10px var(--matrix-green);
+}
+
+@keyframes neonPulse {
+    0% { 
+        box-shadow: 
+            0 0 10px var(--matrix-green),
+            0 0 20px var(--matrix-green),
+            inset 0 0 10px rgba(0, 255, 65, 0.2);
+    }
+    100% { 
+        box-shadow: 
+            0 0 20px var(--matrix-green),
+            0 0 40px var(--matrix-green),
+            inset 0 0 20px rgba(0, 255, 65, 0.4);
+    }
+}
+
+@keyframes rotate {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.title-box { 
+    text-align: center; 
+    margin-bottom: 30px; 
+    width: 100%;
+    border-bottom: 1px solid rgba(0, 255, 65, 0.3);
+    padding-bottom: 15px;
+}
+
+h1 { 
+    font-family: 'Orbitron', sans-serif; 
+    font-size: 2.2rem; 
+    margin: 0; 
+    letter-spacing: 3px; 
+    text-transform: uppercase; 
+    font-weight: 900; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    gap: 10px;
+    color: var(--matrix-green);
+    text-shadow:
+        0 0 5px var(--matrix-green),
+        0 0 10px var(--matrix-green),
+        0 0 20px var(--matrix-green);
+    position: relative;
+}
+
+.glitch-text {
+    animation: text-glitch 3s infinite;
+}
+
+@keyframes text-glitch {
+    0%, 100% { transform: translateX(0); }
+    95% { transform: translateX(0); }
+    96% { transform: translateX(-2px); }
+    97% { transform: translateX(2px); }
+    98% { transform: translateX(-2px); }
+    99% { transform: translateX(2px); }
+}
+
+.arrows { 
+    color: var(--matrix-dark-green); 
+    font-size: 1.5rem; 
+    letter-spacing: -2px; 
+}
+
+.subtitle { 
+    font-size: 1.4rem; 
+    font-weight: 600; 
+    margin: 10px 0 0; 
+    color: var(--text-main); 
+    text-shadow: 0 0 5px var(--matrix-green); 
+    font-family: 'Orbitron', sans-serif;
+    letter-spacing: 2px;
+}
+
+.tagline { 
+    font-size: 0.85rem; 
+    color: var(--matrix-dark-green); 
+    margin-top: 8px; 
+    font-style: italic; 
+    opacity: 0.9;
+    border-top: 1px dashed rgba(0, 255, 65, 0.3);
+    padding-top: 8px;
+    max-width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.card { 
+    width: 100%; 
+    background: rgba(13, 26, 13, 0.8); 
+    border: 1px solid var(--matrix-green); 
+    border-radius: 8px; 
+    padding: 25px 20px; 
+    box-shadow: 
+        0 0 15px rgba(0, 255, 65, 0.3),
+        inset 0 0 10px rgba(0, 255, 65, 0.1);
+    margin-bottom: 20px; 
+    position: relative;
+    overflow: hidden;
+}
+
+.card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--matrix-green), transparent);
+    animation: scan 3s linear infinite;
+}
+
+@keyframes scan {
+    0% { left: -100%; }
+    100% { left: 100%; }
+}
+
+.input-group { 
+    position: relative; 
+    margin-bottom: 25px; 
+}
+
+.input-group::after {
+    content: '>';
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--matrix-green);
+    font-family: 'Share Tech Mono', monospace;
+    font-weight: bold;
+}
+
+input { 
+    width: 100%; 
+    background: rgba(0, 20, 0, 0.7); 
+    border: 1px solid var(--matrix-dark-green); 
+    color: var(--matrix-green); 
+    padding: 16px 15px; 
+    font-size: 1.1rem; 
+    border-radius: 4px; 
+    font-family: 'Share Tech Mono', monospace; 
+    transition: 0.3s; 
+    letter-spacing: 1px;
+}
+
+input:focus { 
+    border-color: var(--matrix-green); 
+    box-shadow: 0 0 10px var(--matrix-green); 
+    background: rgba(0, 30, 0, 0.7);
+}
+
+input::placeholder { 
+    color: var(--matrix-dark-green); 
+    opacity: 0.7;
+}
+
+.btn-main {
+    width: 100%; 
+    background: linear-gradient(to right, #001a00, #003300);
+    color: var(--matrix-green);
+    border: 1px solid var(--matrix-green);
+    padding: 16px; 
+    font-size: 1.1rem; 
+    font-weight: 700;
+    border-radius: 4px; 
+    cursor: pointer; 
+    text-transform: uppercase;
+    letter-spacing: 2px; 
+    font-family: 'Orbitron', sans-serif;
+    transition: all 0.3s;
+    box-shadow: 0 0 10px rgba(0, 255, 65, 0.5);
+    text-shadow: 0 0 5px var(--matrix-green);
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-main:hover { 
+    background: linear-gradient(to right, #003300, #004d00);
+    transform: translateY(-2px); 
+    box-shadow: 0 0 20px var(--matrix-green);
+    letter-spacing: 3px;
+}
+
+.btn-main:active { 
+    transform: translateY(0); 
+}
+
+.btn-main::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -60%;
+    width: 20%;
+    height: 200%;
+    background: rgba(255, 255, 255, 0.1);
+    transform: rotate(30deg);
+    transition: all 0.5s;
+}
+
+.btn-main:hover::after {
+    left: 140%;
+}
+
+.whatsapp-section { 
+    width: 100%; 
+    margin-top: 25px; 
+    text-align: center; 
+}
+
+.wa-btn { 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    width: 100%; 
+    background: linear-gradient(135deg, #0a1a0a, #001a00); 
+    border: 1px solid var(--matrix-dark-green); 
+    color: #fff; 
+    padding: 14px; 
+    border-radius: 4px; 
+    text-decoration: none; 
+    font-weight: 600; 
+    font-size: 0.95rem; 
+    transition: 0.3s; 
+    position: relative; 
+    overflow: hidden;
+    font-family: 'Share Tech Mono', monospace;
+}
+
+.wa-btn i { 
+    font-size: 1.4rem; 
+    margin-right: 10px; 
+    color: var(--whatsapp); 
+}
+
+.wa-btn:hover { 
+    border-color: var(--whatsapp); 
+    background: rgba(37, 211, 102, 0.05); 
+    box-shadow: 0 0 10px rgba(37, 211, 102, 0.5);
+}
+
+.wa-label { 
+    display: flex; 
+    flex-direction: column; 
+    align-items: flex-start; 
+    line-height: 1.2; 
+}
+
+.wa-small { 
+    font-size: 0.7rem; 
+    color: var(--text-sub); 
+}
+
+.footer { 
+    margin-top: 40px; 
+    margin-bottom: 20px;
+    text-align: center; 
+    width: 100%;
+    border-top: 1px solid rgba(0, 255, 65, 0.3);
+    padding-top: 15px;
+}
+
+.powered-text { 
+    color: var(--matrix-dark-green); 
+    font-size: 0.8rem; 
+    margin-bottom: 5px; 
+    letter-spacing: 1px;
+}
+
+.brand-name { 
+    font-family: 'Orbitron', sans-serif; 
+    font-size: 1.2rem; 
+    font-weight: 700; 
+    color: var(--matrix-green); 
+    text-transform: uppercase; 
+    letter-spacing: 2px; 
+    text-shadow: 0 0 10px var(--matrix-green); 
+}
+
+#results-area { 
+    width: 100%; 
+    margin-top: 20px; 
+    display: none; 
+}
+
+.loader { 
+    text-align: center; 
+    color: var(--matrix-green); 
+    font-size: 1.5rem; 
+    margin: 20px 0; 
+    display: none; 
+}
+
+.data-card { 
+    background: rgba(13, 26, 13, 0.9); 
+    border-left: 4px solid var(--matrix-green); 
+    border-radius: 4px; 
+    margin-bottom: 15px; 
+    overflow: hidden; 
+    animation: slideUp 0.4s ease-out; 
+    box-shadow: 0 0 10px rgba(0, 255, 65, 0.3);
+    font-family: 'Share Tech Mono', monospace;
+}
+
+.dc-header { 
+    background: rgba(0, 255, 65, 0.05); 
+    padding: 10px 15px; 
+    font-size: 0.85rem; 
+    font-weight: 700; 
+    color: var(--matrix-green); 
+    display: flex; 
+    justify-content: space-between; 
+    border-bottom: 1px solid rgba(0, 255, 65, 0.2);
+    font-family: 'Orbitron', sans-serif;
+}
+
+.dc-body { 
+    padding: 15px; 
+}
+
+.dc-row { 
+    display: flex; 
+    justify-content: space-between; 
+    margin-bottom: 10px; 
+    border-bottom: 1px dashed rgba(0, 255, 65, 0.2); 
+    padding-bottom: 8px; 
+    font-size: 0.9rem;
+}
+
+.dc-row:last-child { 
+    border: none; 
+    margin: 0; 
+    padding: 0; 
+}
+
+.lbl { 
+    color: var(--matrix-dark-green); 
+    font-size: 0.85rem; 
+    font-weight: 500; 
+    text-transform: uppercase;
+}
+
+.val { 
+    color: var(--matrix-green); 
+    font-size: 0.9rem; 
+    font-weight: 600; 
+    text-align: right; 
+    word-break: break-all;
+    text-shadow: 0 0 5px rgba(0, 255, 65, 0.5);
+}
+
+.login-card { 
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    justify-content: center; 
+    height: 100vh; 
+    width: 100%; 
+    z-index: 100;
+    position: relative;
+}
+
+@keyframes slideUp { 
+    from { opacity: 0; transform: translateY(15px); } 
+    to { opacity: 1; transform: translateY(0); } 
+}
+
+/* Terminal typing effect */
+.terminal-text {
+    overflow: hidden;
+    border-right: 2px solid var(--matrix-green);
+    white-space: nowrap;
+    margin: 0 auto;
+    animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
+}
+
+@keyframes typing {
+    from { width: 0 }
+    to { width: 100% }
+}
+
+@keyframes blink-caret {
+    from, to { border-color: transparent }
+    50% { border-color: var(--matrix-green); }
+}
+
+/* Error message */
+.error-msg {
+    color: #ff3333;
+    text-align: center;
+    padding: 10px;
+    border: 1px solid #ff3333;
+    border-radius: 4px;
+    margin-top: 15px;
+    background: rgba(255, 0, 0, 0.05);
+    font-family: 'Share Tech Mono', monospace;
+}
+
+/* Success message */
+.success-msg {
+    color: var(--matrix-green);
+    text-align: center;
+    padding: 10px;
+    border: 1px solid var(--matrix-green);
+    border-radius: 4px;
+    margin-top: 15px;
+    background: rgba(0, 255, 65, 0.05);
+    font-family: 'Share Tech Mono', monospace;
+}
+
+/* Responsive adjustments */
+@media (max-width: 480px) {
+    .app-container {
+        padding: 0 10px;
+    }
+    
+    h1 {
+        font-size: 1.8rem;
+    }
+    
+    .logo-circle {
+        width: 80px;
+        height: 80px;
+        font-size: 2rem;
+    }
+    
+    .subtitle {
+        font-size: 1.2rem;
+    }
+    
+    .matrix-column {
+        font-size: 2.5vw;
+        width: 2vw;
+    }
+}
+</style>
+</head>  
+<body>  
+
+<!-- Matrix rain effect -->
+<div class="matrix-rain" id="matrixRain"></div>
+
+<!-- Scanline effect -->
+<div class="scanlines"></div>
+
+<div class="login-card" id="login-screen">
+    <div class="card" style="max-width: 350px;">
+        <h2 style="text-align:center; margin-bottom:20px; color: var(--matrix-green); text-shadow: 0 0 10px var(--matrix-green);" class="glitch">
+            <i class="fas fa-terminal"></i> SYSTEM ACCESS
+        </h2>
+        <div class="terminal-text" style="text-align:center; margin-bottom:20px; color: var(--matrix-dark-green);">
+            > ENTER CREDENTIALS TO PROCEED
+        </div>
+        <div class="input-group">
+            <input type="text" id="username" placeholder="USERNAME" autocomplete="off">
+        </div>
+        <div class="input-group">
+            <input type="password" id="password" placeholder="PASSWORD" autocomplete="off">
+        </div>
+        <button class="btn-main" onclick="checkLogin()">
+            <i class="fas fa-unlock-alt"></i> ACCESS SYSTEM
+        </button>
+        <div id="login-error" class="error-msg" style="display:none; margin-top:15px;">
+            > ACCESS DENIED: INVALID CREDENTIALS
+        </div>
+    </div>
+</div>
+
+<div class="app-container" id="main-app" style="display:none;">  
+    <div class="logo-wrapper"> 
+        <div class="logo-circle">
+            <div class="glitch">A</div>
+        </div> 
+    </div>  
+
+    <div class="title-box">  
+        <h1 class="glitch-text">
+            <span class="arrows"><<</span> 
+            <span>AHAD SIM INFO</span> 
+            <span class="arrows">>></span>
+        </h1>  
+        <p class="subtitle">CYBER DATABASE v2.0</p>  
+        <p class="tagline">> SECURE IDENTITY RESOLUTION SYSTEM // ADS-FREE // ENCRYPTED</p>  
+    </div>  
+
+    <div class="card search-card">  
+        <div class="terminal-text" style="color: var(--matrix-dark-green); margin-bottom: 15px;">
+            > ENTER TARGET IDENTIFIER
+        </div>
+        <div class="input-group">  
+            <input type="number" id="target" placeholder="MOBILE NUMBER OR CNIC" autocomplete="off">  
+        </div>  
+        <button class="btn-main" onclick="fetchData()">
+            <i class="fas fa-search"></i> RESOLVE IDENTITY
+        </button>  
+    </div>  
+
+    <div id="loader" class="loader">  
+        <div style="margin-bottom: 10px;">
+            <i class="fas fa-circle-notch fa-spin"></i>
+        </div>
+        <div class="terminal-text" style="font-size: 0.9rem; color: var(--matrix-dark-green);">
+            > QUERYING SECURE DATABASE...
+        </div>
+    </div>  
+
+    <div id="results-area"></div>  
+
+    <div class="whatsapp-section">  
+        <a href="https://whatsapp.com/channel/0029VbBVXLI0rGiR1h2Qat2h" target="_blank" class="wa-btn">  
+            <i class="fab fa-whatsapp"></i>  
+            <div class="wa-label">  
+                <span class="wa-small">SECURE COMMUNICATION CHANNEL</span>  
+                <span>WHATSAPP CHANNEL</span>  
+            </div>  
+        </a>  
+    </div>  
+
+    <div class="footer">  
+        <div class="powered-text">> ENCRYPTED DATA SERVICES</div>  
+        <div class="brand-name">POWERED BY AHAD SYSTEMS</div>  
+        <div style="margin-top: 10px; font-size: 0.7rem; color: var(--matrix-dark-green);">
+            > CONNECTION: SECURE | STATUS: ONLINE
+        </div>
+    </div>  
+</div>  
+
+<script>
+// Generate matrix rain effect
+function createMatrixRain() {
+    const matrixRain = document.getElementById('matrixRain');
+    const columns = Math.floor(window.innerWidth / 20);
+    
+    for (let i = 0; i < columns; i++) {
+        const column = document.createElement('div');
+        column.classList.add('matrix-column');
+        column.style.left = `${(i * 20) + (Math.random() * 10)}px`;
+        column.style.animationDelay = `${Math.random() * 15}s`;
+        column.style.animationDuration = `${10 + Math.random() * 20}s`;
+        
+        // Add random characters
+        let chars = '';
+        const charCount = 20 + Math.floor(Math.random() * 20);
+        for (let j = 0; j < charCount; j++) {
+            // Use a mix of numbers, letters, and symbols
+            const charType = Math.random();
+            if (charType < 0.3) {
+                chars += Math.floor(Math.random() * 10); // Numbers
+            } else if (charType < 0.6) {
+                chars += String.fromCharCode(65 + Math.floor(Math.random() * 26)); // Uppercase letters
+            } else {
+                chars += String.fromCharCode(97 + Math.floor(Math.random() * 26)); // Lowercase letters
+            }
+            chars += '<br>';
+        }
+        
+        column.innerHTML = chars;
+        matrixRain.appendChild(column);
+    }
+}
+
+// Initialize matrix rain
+createMatrixRain();
+
+function checkLogin() {
+    const user = document.getElementById('username').value.trim();
+    const pass = document.getElementById('password').value.trim();
+    const errorMsg = document.getElementById('login-error');
+    
+    // Add typing effect
+    const usernameField = document.getElementById('username');
+    const passwordField = document.getElementById('password');
+    
+    usernameField.style.color = '#00ff41';
+    passwordField.style.color = '#00ff41';
+    
+    if(user === 'ahad' && pass === 'a2z12345') {
+        // Add success effect
+        document.querySelector('.login-card .card').style.borderColor = '#00ff41';
+        document.querySelector('.login-card .card').style.boxShadow = '0 0 20px #00ff41';
+        
+        // Add brief delay for effect
+        setTimeout(() => {
+            document.getElementById('login-screen').style.display = 'none';
+            document.getElementById('main-app').style.display = 'flex';
+            
+            // Welcome message with voice
+            const msg = new SpeechSynthesisUtterance("Access granted. Welcome to Ahad SIM Info cyber database.");
+            window.speechSynthesis.speak(msg);
+            
+            // Add terminal welcome effect
+            const welcomeElement = document.createElement('div');
+            welcomeElement.className = 'terminal-text success-msg';
+            welcomeElement.innerHTML = '> ACCESS GRANTED. WELCOME TO AHAD SIM DATABASE.';
+            welcomeElement.style.marginTop = '20px';
+            welcomeElement.style.width = '100%';
+            document.querySelector('.title-box').appendChild(welcomeElement);
+            
+            // Remove after 5 seconds
+            setTimeout(() => {
+                welcomeElement.remove();
+            }, 5000);
+        }, 800);
+    } else {
+        // Show error with effect
+        errorMsg.style.display = 'block';
+        document.querySelector('.login-card .card').style.borderColor = '#ff3333';
+        document.querySelector('.login-card .card').style.boxShadow = '0 0 20px #ff3333';
+        
+        // Shake animation
+       document.querySelector('.login-card .card').style.animation = 'none';
+        setTimeout(() => {
+            document.querySelector('.login-card .card').style.animation = 'glitch 0.5s';
+        }, 10);
+        
+        // Reset after 1 second
+        setTimeout(() => {
+            document.querySelector('.login-card .card').style.borderColor = '#00ff41';
+            document.querySelector('.login-card .card').style.boxShadow = '0 0 15px rgba(0, 255, 65, 0.3)';
+        }, 1000);
+    }
+}
+
+const API_URL = "https://sim.f-a-k.workers.dev/?q=";   
+const loader = document.getElementById('loader');  
+const resArea = document.getElementById('results-area');  
+const input = document.getElementById('target');  
+
+async function fetchData() {  
+    const query = input.value.trim();  
+    if(query.length < 3) { 
+        showError("> ERROR: PLEASE ENTER A VALID IDENTIFIER (MIN 3 CHARACTERS)"); 
+        return; 
+    }  
+
+    // Clear previous results
+    resArea.innerHTML = ''; 
+    resArea.style.display = 'block'; 
+    loader.style.display = 'block';  
+
+    // Add searching effect
+    const searchingText = document.createElement('div');
+    searchingText.className = 'terminal-text';
+    searchingText.style.color = 'var(--matrix-dark-green)';
+    searchingText.style.fontSize = '0.9rem';
+    searchingText.style.marginTop = '10px';
+    searchingText.innerHTML = `> SEARCHING FOR: ${query}`;
+    loader.appendChild(searchingText);
+
+    try {  
+        // Simulate searching delay with typing effect
+        await new Promise(r => setTimeout(r, 1200));
+        
+        const req = await fetch(API_URL + query);  
+        const json = await req.json();  
+        
+        // Remove searching text
+        searchingText.remove();
+        loader.style.display = 'none';  
+        
+        if(json.status === 'success') {
+            // Success effect
+            const successElement = document.createElement('div');
+            successElement.className = 'terminal-text success-msg';
+            successElement.innerHTML = `> IDENTITY RESOLVED: ${json.data.length || 1} RECORD(S) FOUND`;
+            successElement.style.marginBottom = '15px';
+            resArea.appendChild(successElement);
+            
+            // Render data
+            renderCards(json.data);
+            
+            // Remove success message after 3 seconds
+            setTimeout(() => {
+                successElement.remove();
+            }, 3000);
+        } else {
+            showError("> NO DATA FOUND FOR THE PROVIDED IDENTIFIER");
+        }  
+    } catch (e) {  
+        loader.style.display = 'none';  
+        showError("> CONNECTION ERROR: DATABASE UNREACHABLE");
+        console.error(e);
+    }  
+}  
+
+function showError(message) {
+    resArea.innerHTML = `<div class="error-msg terminal-text">${message}</div>`;
+    resArea.style.display = 'block';
+    
+    // Add glitch effect
+    const errorElement = document.querySelector('.error-msg');
+    errorElement.style.animation = 'glitch 0.5s';
+}
+
+function renderCards(data) {  
+    let records = Array.isArray(data) ? data : [data];  
+    let html = '';  
+    
+    records.forEach((rec, idx) => {  
+        html += `<div class="data-card">
+            <div class="dc-header">
+                <span><i class="fas fa-database"></i> RECORD #${idx+1}</span>
+                <span><i class="fas fa-check-circle"></i> VERIFIED</span>
+            </div>
+            <div class="dc-body">`;  
+        
+        // Filter out unwanted fields
+        const filteredEntries = Object.entries(rec).filter(
+            ([key]) => !['response_code','credit','api_owner'].includes(key)
+        );
+        
+        filteredEntries.forEach(([key,val]) => {  
+            html += `<div class="dc-row">
+                <span class="lbl">${key.toUpperCase().replace(/_/g, ' ')}</span>
+                <span class="val">${val}</span>
+            </div>`;  
+        });  
+        
+        html += `</div></div>`;  
+    });  
+    
+    resArea.innerHTML += html;  
+}  
+
+// Add Enter key support
+input.addEventListener("keypress", e => { 
+    if(e.key === "Enter") fetchData(); 
+});
+
+// Add focus effect to input
+input.addEventListener('focus', function() {
+    this.style.backgroundColor = 'rgba(0, 40, 0, 0.7)';
+});
+
+input.addEventListener('blur', function() {
+    this.style.backgroundColor = 'rgba(0, 20, 0, 0.7)';
+});
+
+// Add click sound effect (optional)
+document.addEventListener('click', function(e) {
+    if (e.target.tagName === 'BUTTON' || e.target.tagName === 'INPUT') {
+        // Optional: Add a subtle sound effect here
+        console.log('> INTERACTION DETECTED');
+    }
+});
+</script>
+
+</body>  
+</html>
